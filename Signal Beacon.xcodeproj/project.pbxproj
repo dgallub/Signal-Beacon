@@ -10,6 +10,7 @@
 		632F878B1FAE5189004DA820 /* DictPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F878A1FAE5189004DA820 /* DictPin.swift */; };
 		632F878D1FAE5304004DA820 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F878C1FAE5304004DA820 /* Pin.swift */; };
 		632F878F1FAE67B2004DA820 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F878E1FAE67B2004DA820 /* ARViewController.swift */; };
+		632F87931FAE72DD004DA820 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 632F87921FAE72DD004DA820 /* GoogleService-Info.plist */; };
 		63C20AA31FAE4A1F000F378E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C20AA21FAE4A1F000F378E /* AppDelegate.swift */; };
 		63C20AA51FAE4A1F000F378E /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C20AA41FAE4A1F000F378E /* FirstViewController.swift */; };
 		63C20AA71FAE4A1F000F378E /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C20AA61FAE4A1F000F378E /* SecondViewController.swift */; };
@@ -17,7 +18,6 @@
 		63C20AAC1FAE4A1F000F378E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63C20AAB1FAE4A1F000F378E /* Assets.xcassets */; };
 		63C20AAF1FAE4A1F000F378E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C20AAD1FAE4A1F000F378E /* LaunchScreen.storyboard */; };
 		63C20ABA1FAE4A1F000F378E /* Signal_BeaconTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C20AB91FAE4A1F000F378E /* Signal_BeaconTests.swift */; };
-		71BCF1711FAE5FF900C8FF03 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71BCF1701FAE5FF600C8FF03 /* GoogleService-Info.plist */; };
 		7E795F6C56B7C49E6CB151BF /* Pods_Signal_BeaconTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B264ADD4FB88B01F0AF654E /* Pods_Signal_BeaconTests.framework */; };
 		8EB2546B71BB0220A752F882 /* Pods_Signal_Beacon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 379A03A091089ED1CD705270 /* Pods_Signal_Beacon.framework */; };
 /* End PBXBuildFile section */
@@ -42,6 +42,7 @@
 		632F878A1FAE5189004DA820 /* DictPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictPin.swift; sourceTree = "<group>"; };
 		632F878C1FAE5304004DA820 /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		632F878E1FAE67B2004DA820 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
+		632F87921FAE72DD004DA820 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63C20A9F1FAE4A1F000F378E /* Signal Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Signal Beacon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C20AA21FAE4A1F000F378E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63C20AA41FAE4A1F000F378E /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -53,7 +54,6 @@
 		63C20AB51FAE4A1F000F378E /* Signal BeaconTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Signal BeaconTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C20AB91FAE4A1F000F378E /* Signal_BeaconTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signal_BeaconTests.swift; sourceTree = "<group>"; };
 		63C20ABB1FAE4A1F000F378E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		71BCF1701FAE5FF600C8FF03 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +110,7 @@
 		63C20AA11FAE4A1F000F378E /* Signal Beacon */ = {
 			isa = PBXGroup;
 			children = (
-				71BCF1701FAE5FF600C8FF03 /* GoogleService-Info.plist */,
+				632F87921FAE72DD004DA820 /* GoogleService-Info.plist */,
 				63C20AA21FAE4A1F000F378E /* AppDelegate.swift */,
 				63C20AA41FAE4A1F000F378E /* FirstViewController.swift */,
 				632F878C1FAE5304004DA820 /* Pin.swift */,
@@ -233,7 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63C20AAF1FAE4A1F000F378E /* LaunchScreen.storyboard in Resources */,
-				71BCF1711FAE5FF900C8FF03 /* GoogleService-Info.plist in Resources */,
+				632F87931FAE72DD004DA820 /* GoogleService-Info.plist in Resources */,
 				63C20AAC1FAE4A1F000F378E /* Assets.xcassets in Resources */,
 				63C20AAA1FAE4A1F000F378E /* Main.storyboard in Resources */,
 			);
