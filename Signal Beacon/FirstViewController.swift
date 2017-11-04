@@ -16,8 +16,8 @@ struct pin{
     let lat : Double!
     let long : Double!
     let username: String!
-    let title: String!
-    let description : String!
+    let friends: [String]!
+    
 }
 
 class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UINavigationControllerDelegate {
@@ -99,14 +99,14 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                         let key = snap.key
                         let pinDict = DictPin(key: key, dictionary: postDictionary)
                         self.pinList.insert(pinDict, at: 0)
-                        if(pinDict.pinLink == nil){
+                        /*if(pinDict.pinLink == nil){
                             self.tempString = "placeholder"
                         }
                         else{
                             self.tempString = pinDict.pinLink
                         }
-                        self.tempPin = Pin(lat: pinDict.pinLat, long: pinDict.pinLong, username: pinDict.pinUsername, title: pinDict.pinTitle, description: pinDict.pinDescription, link: self.tempString)
-                        self.picLink = pinDict.pinLink
+                        */
+                        self.tempPin = Pin(lat: pinDict.pinLat, long: pinDict.pinLong, username: pinDict.pinUsername, friends: pinDict.friends)
                         self.markMap(self.tempPin)
                     }
                 }
@@ -220,10 +220,12 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     //Adds pins to the map (causes mapView to be called).  Coordinates and subtitles are read in from the Firebase backend.
     func markMap(_ pin: Pin){
         let annotation = MKPointAnnotation()
+        let coordinate0 = CLLocation(MKUserLocation. longitude: 5.0)
+        let coordinate1 = CLLocation(latitude: 5.0, longitude: 5.0)
         annotation.coordinate.latitude = pin.lat
         annotation.coordinate.longitude = pin.long
-        annotation.title = pin.title
-        annotation.subtitle = pin.description
+        annotation.title = pin.username
+        annotation.subtitle = "distance"
         mapView.addAnnotation(annotation)
         
     }

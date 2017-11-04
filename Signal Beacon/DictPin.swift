@@ -7,14 +7,12 @@
 //
 
 import Foundation
-
+/Users/thomasshealy/Desktop/Signal-Beacon/Signal Beacon/DictPin.swift
 class DictPin{
     var pinLat: Double!
     var pinLong: Double!
     var pinUsername: String!
-    var pinDescription: String!
-    var pinTitle: String!
-    var pinLink: String!
+    var friends: [String]!
     
     var pinKey: String!
     
@@ -31,14 +29,9 @@ class DictPin{
         if let username = dictionary["username"] as? String{
             self.pinUsername = username
         }
-        if let description = dictionary["description"] as? String{
-            self.pinDescription = description
+        if let friends = dictionary["friends"] as? [String]{
+            self.friends = friends
         }
-        if let title = dictionary["title"] as? String{
-            self.pinTitle = title
-        }
-        if let link = dictionary["pinLink"] as? String{
-            self.pinLink = link
-        }
+   
     }
 }
