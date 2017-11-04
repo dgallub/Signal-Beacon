@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		632F878B1FAE5189004DA820 /* DictPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F878A1FAE5189004DA820 /* DictPin.swift */; };
+		632F878D1FAE5304004DA820 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F878C1FAE5304004DA820 /* Pin.swift */; };
 		63C20AA31FAE4A1F000F378E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C20AA21FAE4A1F000F378E /* AppDelegate.swift */; };
 		63C20AA51FAE4A1F000F378E /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C20AA41FAE4A1F000F378E /* FirstViewController.swift */; };
 		63C20AA71FAE4A1F000F378E /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C20AA61FAE4A1F000F378E /* SecondViewController.swift */; };
@@ -36,6 +38,8 @@
 		379A03A091089ED1CD705270 /* Pods_Signal_Beacon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Signal_Beacon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B1542ACDD28AF655DFA645C /* Pods-Signal BeaconTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Signal BeaconTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Signal BeaconTests/Pods-Signal BeaconTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A27E1EF0589D778345CB2DB /* Pods-Signal Beacon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Signal Beacon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Signal Beacon/Pods-Signal Beacon.release.xcconfig"; sourceTree = "<group>"; };
+		632F878A1FAE5189004DA820 /* DictPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictPin.swift; sourceTree = "<group>"; };
+		632F878C1FAE5304004DA820 /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		63C20A9F1FAE4A1F000F378E /* Signal Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Signal Beacon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C20AA21FAE4A1F000F378E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63C20AA41FAE4A1F000F378E /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 				63C20AC41FAE4A2D000F378E /* GoogleService-Info.plist */,
 				63C20AA21FAE4A1F000F378E /* AppDelegate.swift */,
 				63C20AA41FAE4A1F000F378E /* FirstViewController.swift */,
+				632F878C1FAE5304004DA820 /* Pin.swift */,
+				632F878A1FAE5189004DA820 /* DictPin.swift */,
 				63C20AA61FAE4A1F000F378E /* SecondViewController.swift */,
 				63C20AA81FAE4A1F000F378E /* Main.storyboard */,
 				63C20AAB1FAE4A1F000F378E /* Assets.xcassets */,
@@ -337,9 +343,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				632F878D1FAE5304004DA820 /* Pin.swift in Sources */,
 				63C20AA71FAE4A1F000F378E /* SecondViewController.swift in Sources */,
 				63C20AA31FAE4A1F000F378E /* AppDelegate.swift in Sources */,
 				63C20AA51FAE4A1F000F378E /* FirstViewController.swift in Sources */,
+				632F878B1FAE5189004DA820 /* DictPin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +504,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KDT4YGN6SW;
 				INFOPLIST_FILE = "Signal Beacon/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Amatrine.Signal-Beacon";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -512,6 +521,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KDT4YGN6SW;
 				INFOPLIST_FILE = "Signal Beacon/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Amatrine.Signal-Beacon";
 				PRODUCT_NAME = "$(TARGET_NAME)";
