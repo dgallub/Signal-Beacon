@@ -7,7 +7,6 @@
 //
 
 import Foundation
-/Users/thomasshealy/Desktop/Signal-Beacon/Signal Beacon/DictPin.swift
 class DictPin{
     var pinLat: Double!
     var pinLong: Double!

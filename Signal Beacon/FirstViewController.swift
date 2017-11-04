@@ -220,12 +220,14 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     //Adds pins to the map (causes mapView to be called).  Coordinates and subtitles are read in from the Firebase backend.
     func markMap(_ pin: Pin){
         let annotation = MKPointAnnotation()
-        let coordinate0 = CLLocation(MKUserLocation. longitude: 5.0)
-        let coordinate1 = CLLocation(latitude: 5.0, longitude: 5.0)
+        let coordinate0 = CLLocation(latitude:(locationMgr.location?.coordinate.latitude)!,
+                                     longitude: (locationMgr.location?.coordinate.longitude)!)
+        let coordinate1 = CLLocation(latitude: pin.lat, longitude: pin.long)
+        let distance = coordinate0.distance(from: coordinate1)
         annotation.coordinate.latitude = pin.lat
         annotation.coordinate.longitude = pin.long
         annotation.title = pin.username
-        annotation.subtitle = "distance"
+        annotation.subtitle = String(distance)
         mapView.addAnnotation(annotation)
         
     }
