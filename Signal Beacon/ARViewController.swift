@@ -16,11 +16,14 @@ class  ARViewController: UIViewController, ARSCNViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Ask for camera permissions
+        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {_ in
+            
+        })
+        
         // Set up ARSceneView
         ARSceneView.delegate = self
         ARSceneView.showsStatistics = true
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        ARSceneView.scene = scene
     }
     
     override func viewWillAppear(_ animated: Bool) {
