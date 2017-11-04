@@ -270,6 +270,12 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     }
  */
     
+    @IBAction func viewButtonPressed(_ sender: Any) {
+    }
+    
+    @IBAction func activateButtonPressed(_ sender: Any) {
+    }
+    
 }
 
 

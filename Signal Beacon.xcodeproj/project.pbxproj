@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		632F878B1FAE5189004DA820 /* DictPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F878A1FAE5189004DA820 /* DictPin.swift */; };
 		632F878D1FAE5304004DA820 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F878C1FAE5304004DA820 /* Pin.swift */; };
+		632F878F1FAE67B2004DA820 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632F878E1FAE67B2004DA820 /* ARViewController.swift */; };
 		63C20AA31FAE4A1F000F378E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C20AA21FAE4A1F000F378E /* AppDelegate.swift */; };
 		63C20AA51FAE4A1F000F378E /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C20AA41FAE4A1F000F378E /* FirstViewController.swift */; };
 		63C20AA71FAE4A1F000F378E /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C20AA61FAE4A1F000F378E /* SecondViewController.swift */; };
@@ -40,6 +41,7 @@
 		5A27E1EF0589D778345CB2DB /* Pods-Signal Beacon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Signal Beacon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Signal Beacon/Pods-Signal Beacon.release.xcconfig"; sourceTree = "<group>"; };
 		632F878A1FAE5189004DA820 /* DictPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictPin.swift; sourceTree = "<group>"; };
 		632F878C1FAE5304004DA820 /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
+		632F878E1FAE67B2004DA820 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		63C20A9F1FAE4A1F000F378E /* Signal Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Signal Beacon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C20AA21FAE4A1F000F378E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63C20AA41FAE4A1F000F378E /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				632F878C1FAE5304004DA820 /* Pin.swift */,
 				632F878A1FAE5189004DA820 /* DictPin.swift */,
 				63C20AA61FAE4A1F000F378E /* SecondViewController.swift */,
+				632F878E1FAE67B2004DA820 /* ARViewController.swift */,
 				63C20AA81FAE4A1F000F378E /* Main.storyboard */,
 				63C20AAB1FAE4A1F000F378E /* Assets.xcassets */,
 				63C20AAD1FAE4A1F000F378E /* LaunchScreen.storyboard */,
@@ -346,6 +349,7 @@
 				632F878D1FAE5304004DA820 /* Pin.swift in Sources */,
 				63C20AA71FAE4A1F000F378E /* SecondViewController.swift in Sources */,
 				63C20AA31FAE4A1F000F378E /* AppDelegate.swift in Sources */,
+				632F878F1FAE67B2004DA820 /* ARViewController.swift in Sources */,
 				63C20AA51FAE4A1F000F378E /* FirstViewController.swift in Sources */,
 				632F878B1FAE5189004DA820 /* DictPin.swift in Sources */,
 			);
