@@ -91,7 +91,7 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         //Reads in pins stored on the Firebase server, and listens/adds when other users create pins.
         //Pins are read in as DictPin objects (see DictPin class for more info), and added to the maps as Pin objects
         //(see pin class for more info.
-        ref.child("Pins").observe(DataEventType.value, with: { snapshot in
+        ref.child("signal-beacon-50167").observe(DataEventType.value, with: { snapshot in
             self.pinList = []
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
