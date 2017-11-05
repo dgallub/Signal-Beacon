@@ -299,12 +299,15 @@ extension FirstViewController{
     }
     //Sets where the map initially zooms into and determines how far in the zoom is.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        if let location = locations.first{
-            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        print("method called")
+        print(locationMgr.location?.coordinate.latitude)
+        print(locationMgr.location?.coordinate.longitude)
+        let location = self.locationMgr.location
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: (location?.coordinate)!, span: span)
             
             self.mapView.setRegion(region, animated: true)
-        }
+        
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
         print("error:: (error)")
