@@ -81,7 +81,7 @@ class  ARViewController: UIViewController, ARSKViewDelegate {
     /**
      Precise bearing between two points.
      */
-    static func bearingBetween(startLocation: CLLocation, endLocation: CLLocation) -> Float {
+    func bearingBetween(startLocation: CLLocation, endLocation: CLLocation) -> Float {
         var azimuth: Float = 0
         let lat1 = GLKMathDegreesToRadians(
             Float(startLocation.coordinate.latitude)
@@ -111,10 +111,10 @@ class  ARViewController: UIViewController, ARSKViewDelegate {
                         float4( matrix.m30,matrix.m31,matrix.m32,matrix.m33 ))
     }
     
-    func getTransformGiven(currentLocation: CLLocation) -> matrix_float4x4 {
+    func getTransformGiven(currentLocation: CLLocation, pinLocation: CLLocation) -> matrix_float4x4 {
         let bearing = bearingBetween(
             startLocation: currentLocation,
-            endLocation: location
+            endLocation: pinLocation
         )
         let distance = 5
         let originTransform = matrix_identity_float4x4
