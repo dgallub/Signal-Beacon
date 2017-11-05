@@ -97,7 +97,7 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
         sceneView.session.pause()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    /* override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Create anchor using the camera's current position
         if let currentFrame = sceneView.session.currentFrame {
             // Create a transform with a translation of 0.2 meters in front of the camera
@@ -109,7 +109,7 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
             let anchor = ARAnchor(transform: transform)
             sceneView.session.add(anchor: anchor)
         }
-    }
+    } /*
     
     
     func view(_ view: ARSKView, nodeFor anchor: ARAnchor) -> SKNode? {
@@ -212,4 +212,5 @@ extension ARViewController{
         
     }
     
+ }*/*/
 }
