@@ -21,6 +21,7 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
     var timer: Timer!
     var ref: DatabaseReference!
     var sceneLocationView = SceneLocationView()
+    var activated: Bool!
     
     @IBOutlet weak var sceneView: ARSKView!
     
@@ -109,7 +110,7 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
             let anchor = ARAnchor(transform: transform)
             sceneView.session.add(anchor: anchor)
         }
-    } /*
+    }
     
     
     func view(_ view: ARSKView, nodeFor anchor: ARAnchor) -> SKNode? {
@@ -121,11 +122,10 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
         labelNode.horizontalAlignmentMode = .center
         labelNode.verticalAlignmentMode = .center
         return labelNode;
-    }
+    } */
     
-    /**
-     Precise bearing between two points.
-     */
+    // Precise bearing between two points.
+ 
     func bearingBetween(startLocation: CLLocation, endLocation: CLLocation) -> Float {
         var azimuth: Float = 0
         let lat1 = GLKMathDegreesToRadians(
@@ -212,5 +212,5 @@ extension ARViewController{
         
     }
     
- }*/*/
-}
+ }
+

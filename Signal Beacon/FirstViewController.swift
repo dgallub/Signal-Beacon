@@ -50,6 +50,7 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     var downLink: String?
     var tempString: String!
     let locationMgr = CLLocationManager()
+    var activated = false
     
     //References to mapView and textfield objects (see Main.storyboard)
   //  @IBOutlet weak var mapView: MKMapView!
@@ -281,9 +282,17 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
  */
     
     @IBAction func viewButtonPressed(_ sender: Any) {
+        pass()
     }
     
     @IBAction func activateButtonPressed(_ sender: Any) {
+        activated = true
+    }
+    func pass(){
+        let storyboard = UIStoryboard.init(name: "ARController", bundle: nil)
+        let ARController = storyboard.instantiateViewController(withIdentifier: "ARController") as!
+        ARViewController
+        ARController.activated = activated
     }
     
 }
@@ -307,6 +316,12 @@ extension FirstViewController{
         let region = MKCoordinateRegion(center: (location?.coordinate)!, span: span)
             
             self.mapView.setRegion(region, animated: true)
+        
+        if(activated == true){
+            let userRef = ref.child("Users").child("KXO")
+            userRef.updateChildValues(["lat": location?.coordinate.latitude])
+            userRef.updateChildValues(["long": location?.coordinate.longitude])
+        }
         
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
