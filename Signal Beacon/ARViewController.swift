@@ -11,6 +11,7 @@ import SpriteKit
 import Firebase
 import CoreLocation
 import GLKit
+import ARCL
 
 class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDelegate {
     
@@ -19,6 +20,7 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
     var coordinate1 = CLLocation(latitude: 35.9068, longitude: -79.0477)
     var timer: Timer!
     var ref: DatabaseReference!
+    var sceneLocationView = SceneLocationView()
     
     @IBOutlet weak var sceneView: ARSKView!
     
@@ -37,7 +39,7 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
             
         })
         
-        // Set up ARSceneView
+   /*     // Set up ARSceneView
         sceneView.delegate = self
         
         sceneView.showsFPS = true
@@ -45,9 +47,19 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
         
         let scene = SKScene(size: sceneView.bounds.size)
         scene.scaleMode = .resizeFill
-        sceneView.presentScene(scene)
+        sceneView.presentScene(scene) */
         
-        if let currentFrame = sceneView.session.currentFrame {
+        sceneLocationView.run()
+        view.addSubview(sceneLocationView)
+        
+        let location = coordinate1
+        let image = UIImage(named: "pin")!
+        
+        let annotationNode = LocationAnnotationNode(location: location, image: image)
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+        
+        
+       /* if let currentFrame = sceneView.session.currentFrame {
             // Create a transform with a translation of 0.2 meters in front of the camera
             let translation = getTransformGiven(currentLocation: locationMgr.location!, pinLocation: coordinate1)
             let transform = simd_mul(currentFrame.camera.transform, translation)
@@ -55,10 +67,16 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
             // Add a new anchor to the session
             let anchor = ARAnchor(transform: transform)
             sceneView.session.add(anchor: anchor)
-        }
- 
+        } */
         
         
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        sceneLocationView.frame = view.bounds
     }
     
     override func viewWillAppear(_ animated: Bool) {
