@@ -9,6 +9,8 @@
 import ARKit
 import SpriteKit
 import Firebase
+import CoreLocation
+import GLKit
 
 class  ARViewController: UIViewController, ARSKViewDelegate {
     
@@ -74,6 +76,53 @@ class  ARViewController: UIViewController, ARSKViewDelegate {
         labelNode.horizontalAlignmentMode = .center
         labelNode.verticalAlignmentMode = .center
         return labelNode;
+    }
+    
+    /**
+     Precise bearing between two points.
+     */
+    static func bearingBetween(startLocation: CLLocation, endLocation: CLLocation) -> Float {
+        var azimuth: Float = 0
+        let lat1 = GLKMathDegreesToRadians(
+            Float(startLocation.coordinate.latitude)
+        )
+        let lon1 = GLKMathDegreesToRadians(
+            Float(startLocation.coordinate.longitude)
+        )
+        let lat2 = GLKMathDegreesToRadians(
+            Float(endLocation.coordinate.latitude)
+        )
+        let lon2 = GLKMathDegreesToRadians(
+            Float(endLocation.coordinate.longitude)
+        )
+        let dLon = lon2 - lon1
+        let y = sin(dLon) * cos(lat2)
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
+        let radiansBearing = atan2(y, x)
+        azimuth = GLKMathRadiansToDegrees(Float(radiansBearing))
+        if(azimuth < 0) { azimuth += 360 }
+        return azimuth
+    }
+    
+    func convertGLKMatrix4Tosimd_float4x4(matrix: GLKMatrix4) -> float4x4{
+        return float4x4(float4(matrix.m00,matrix.m01,matrix.m02,matrix.m03),
+                        float4( matrix.m10,matrix.m11,matrix.m12,matrix.m13 ),
+                        float4( matrix.m20,matrix.m21,matrix.m22,matrix.m23 ),
+                        float4( matrix.m30,matrix.m31,matrix.m32,matrix.m33 ))
+    }
+    
+    func getTransformGiven(currentLocation: CLLocation) -> matrix_float4x4 {
+        let bearing = bearingBetween(
+            startLocation: currentLocation,
+            endLocation: location
+        )
+        let distance = 5
+        let originTransform = matrix_identity_float4x4
+        var translationMatrix = matrix_identity_float4x4
+        translationMatrix.columns.3.z = -1 * Float(distance)
+        let rotationMatrix = GLKMatrix4RotateY(GLKMatrix4Identity, -1 * bearing)
+        let transformMatrix = simd_mul(convertGLKMatrix4Tosimd_float4x4(matrix: rotationMatrix), translationMatrix)
+        return simd_mul(originTransform, transformMatrix)
     }
     
     
