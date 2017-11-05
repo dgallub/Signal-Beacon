@@ -31,36 +31,7 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
         self.locationMgr.requestLocation();
         self.locationMgr.startUpdatingLocation()
         self.locationMgr.startUpdatingHeading()
-        ref.child("Users").observe(DataEventType.value, with: { snapshot in
-            self.pinList = []
-            print("enters method")
-            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
-                print("enters if")
-                print(snapshots.count)
-                for snap in snapshots {
-                    if let postDictionary = snap.value as? Dictionary<String, AnyObject> {
-                        let key = snap.key
-                        let pinDict = DictPin(key: key, dictionary: postDictionary)
-                        self.pinList.insert(pinDict, at: 0)
-                        /*if(pinDict.pinLink == nil){
-                         self.tempString = "placeholder"
-                         }
-                         else{
-                         self.tempString = pinDict.pinLink
-                         }
-                         */
-                        //print(self.tempPin.username)
-                        self.tempPin = Pin(lat: pinDict.pinLat, long: pinDict.pinLong, username: pinDict.pinUsername, friends: pinDict.friends)
-                        self.markMap(self.tempPin)
-                    }
-                }
-                
-                
-            }
-            
-            //self.hasRan = true
-            
-        })
+        
         // Ask for camera permissions
         AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {_ in
             
