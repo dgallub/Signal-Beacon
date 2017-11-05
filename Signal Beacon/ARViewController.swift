@@ -18,17 +18,49 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
     //var coordinate0 = CLLocation(latitude: 35.909471407552445, longitude: -79.046063745071379)
     var coordinate1 = CLLocation(latitude: 35.9068, longitude: -79.0477)
     var timer: Timer!
+    var ref: DatabaseReference!
     
     @IBOutlet weak var sceneView: ARSKView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.locationMgr.delegate = self
         self.locationMgr.requestAlwaysAuthorization()
         self.locationMgr.desiredAccuracy = kCLLocationAccuracyBest
         self.locationMgr.requestLocation();
         self.locationMgr.startUpdatingLocation()
         self.locationMgr.startUpdatingHeading()
+        ref.child("Users").observe(DataEventType.value, with: { snapshot in
+            self.pinList = []
+            print("enters method")
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                print("enters if")
+                print(snapshots.count)
+                for snap in snapshots {
+                    if let postDictionary = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let pinDict = DictPin(key: key, dictionary: postDictionary)
+                        self.pinList.insert(pinDict, at: 0)
+                        /*if(pinDict.pinLink == nil){
+                         self.tempString = "placeholder"
+                         }
+                         else{
+                         self.tempString = pinDict.pinLink
+                         }
+                         */
+                        //print(self.tempPin.username)
+                        self.tempPin = Pin(lat: pinDict.pinLat, long: pinDict.pinLong, username: pinDict.pinUsername, friends: pinDict.friends)
+                        self.markMap(self.tempPin)
+                    }
+                }
+                
+                
+            }
+            
+            //self.hasRan = true
+            
+        })
         // Ask for camera permissions
         AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {_ in
             
