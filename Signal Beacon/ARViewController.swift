@@ -12,13 +12,23 @@ import Firebase
 import CoreLocation
 import GLKit
 
-class  ARViewController: UIViewController, ARSKViewDelegate {
+class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDelegate {
+    
+    let locationMgr = CLLocationManager()
+    //var coordinate0 = CLLocation(latitude: 35.909471407552445, longitude: -79.046063745071379)
+    var coordinate1 = CLLocation(latitude: 35.9068, longitude: -79.0477)
+    var timer: Timer!
     
     @IBOutlet weak var sceneView: ARSKView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.locationMgr.delegate = self
+        self.locationMgr.requestAlwaysAuthorization()
+        self.locationMgr.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationMgr.requestLocation();
+        self.locationMgr.startUpdatingLocation()
+        self.locationMgr.startUpdatingHeading()
         // Ask for camera permissions
         AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {_ in
             
@@ -33,6 +43,19 @@ class  ARViewController: UIViewController, ARSKViewDelegate {
         let scene = SKScene(size: sceneView.bounds.size)
         scene.scaleMode = .resizeFill
         sceneView.presentScene(scene)
+        
+        if let currentFrame = sceneView.session.currentFrame {
+            // Create a transform with a translation of 0.2 meters in front of the camera
+            let translation = getTransformGiven(currentLocation: locationMgr.location!, pinLocation: coordinate1)
+            let transform = simd_mul(currentFrame.camera.transform, translation)
+            
+            // Add a new anchor to the session
+            let anchor = ARAnchor(transform: transform)
+            sceneView.session.add(anchor: anchor)
+        }
+ 
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,11 +90,12 @@ class  ARViewController: UIViewController, ARSKViewDelegate {
         }
     }
     
+    
     func view(_ view: ARSKView, nodeFor anchor: ARAnchor) -> SKNode? {
         // Create and configure a node for the anchor added to the view's
         // session.
-        let labelNode = SKLabelNode(text: "Hello, Thomas")
-        labelNode.fontSize = 6
+        let labelNode = SKLabelNode(text: "Person is here")
+        labelNode.fontSize = 5
         labelNode.fontColor = UIColor.green
         labelNode.horizontalAlignmentMode = .center
         labelNode.verticalAlignmentMode = .center
@@ -111,12 +135,23 @@ class  ARViewController: UIViewController, ARSKViewDelegate {
                         float4( matrix.m30,matrix.m31,matrix.m32,matrix.m33 ))
     }
     
+    func makeAnchor(startCoordinate: CLLocation, endCoordinate: CLLocation){
+        if let currentFrame = sceneView.session.currentFrame {
+            // Create a transform with a translation of 0.2 meters in front of the camera
+            let translation = getTransformGiven(currentLocation: startCoordinate, pinLocation: endCoordinate)
+            let transform = simd_mul(currentFrame.camera.transform, translation)
+            
+            // Add a new anchor to the session
+            let anchor = ARAnchor(transform: transform)
+            sceneView.session.add(anchor: anchor)}
+    }
+    
     func getTransformGiven(currentLocation: CLLocation, pinLocation: CLLocation) -> matrix_float4x4 {
         let bearing = bearingBetween(
             startLocation: currentLocation,
             endLocation: pinLocation
         )
-        let distance = 5
+        let distance = 0.6
         let originTransform = matrix_identity_float4x4
         var translationMatrix = matrix_identity_float4x4
         translationMatrix.columns.3.z = -1 * Float(distance)
@@ -129,4 +164,31 @@ class  ARViewController: UIViewController, ARSKViewDelegate {
     
     @IBAction func backButtonPressed(_ sender: Any) {
     }
+}
+extension ARViewController{
+    //tracks the users location and monitors for a change in location authorization (the user disables location services, etc.).
+    func locationManager(_ manager:CLLocationManager, didChangeAuthorization status:
+        CLAuthorizationStatus){
+        if status == .authorizedWhenInUse{
+            locationMgr.requestLocation()
+        }
+    }
+    //Sets where the map initially zooms into and determines how far in the zoom is.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        print("method called")
+        print(locationMgr.location?.coordinate.latitude)
+        print(locationMgr.location?.coordinate.longitude)
+        makeAnchor(startCoordinate: locationMgr.location!, endCoordinate: coordinate1)
+        let location = self.locationMgr.location
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
+        print("error:: (error)")
+    }
+    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!){
+        print("old location", oldLocation.coordinate.latitude, " ", oldLocation.coordinate.longitude)
+        print("new location", newLocation.coordinate.latitude, " ", newLocation.coordinate.longitude)
+        
+    }
+    
 }

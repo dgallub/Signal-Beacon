@@ -68,7 +68,7 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         downLink = "fill link"
         self.locationMgr.delegate = self
       //  self.locationMgr.requestWhenInUseAuthorization()
-        self.locationMgr.requestAlwaysAuthorization()
+        //self.locationMgr.requestAlwaysAuthorization()
         self.locationMgr.desiredAccuracy = kCLLocationAccuracyBest
         self.locationMgr.requestLocation();
         self.locationMgr.startUpdatingLocation()
