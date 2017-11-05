@@ -71,6 +71,8 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         self.locationMgr.requestAlwaysAuthorization()
         self.locationMgr.desiredAccuracy = kCLLocationAccuracyBest
         self.locationMgr.requestLocation();
+        self.locationMgr.startUpdatingLocation()
+        self.locationMgr.startUpdatingHeading()
        /* let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as!
         LocationSearchTable*/
        // resultSearchController = UISearchController(searchResultsController: locationSearchTable)
@@ -91,9 +93,12 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         //Reads in pins stored on the Firebase server, and listens/adds when other users create pins.
         //Pins are read in as DictPin objects (see DictPin class for more info), and added to the maps as Pin objects
         //(see pin class for more info.
-        ref.child("signal-beacon-50167").observe(DataEventType.value, with: { snapshot in
+        ref.child("Users").observe(DataEventType.value, with: { snapshot in
             self.pinList = []
+            print("enters method")
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                print("enters if")
+                print(snapshots.count)
                 for snap in snapshots {
                     if let postDictionary = snap.value as? Dictionary<String, AnyObject> {
                         let key = snap.key
@@ -106,6 +111,7 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                             self.tempString = pinDict.pinLink
                         }
                         */
+                        //print(self.tempPin.username)
                         self.tempPin = Pin(lat: pinDict.pinLat, long: pinDict.pinLong, username: pinDict.pinUsername, friends: pinDict.friends)
                         self.markMap(self.tempPin)
                     }
@@ -223,7 +229,7 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         let coordinate0 = CLLocation(latitude:(locationMgr.location?.coordinate.latitude)!,
                                      longitude: (locationMgr.location?.coordinate.longitude)!)
         let coordinate1 = CLLocation(latitude: pin.lat, longitude: pin.long)
-        let distance = coordinate0.distance(from: coordinate1)
+        var distance = coordinate0.distance(from: coordinate1)*3.28084
         annotation.coordinate.latitude = pin.lat
         annotation.coordinate.longitude = pin.long
         annotation.title = pin.username
@@ -303,6 +309,12 @@ extension FirstViewController{
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
         print("error:: (error)")
     }
+    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!){
+        print("old location", oldLocation.coordinate.latitude, " ", oldLocation.coordinate.longitude)
+        print("new location", newLocation.coordinate.latitude, " ", newLocation.coordinate.longitude)
+        
+    }
+
 }
 //Handles when a user marks a location on the map.
 /*extension ViewController: HandleMapSearch{
