@@ -14,13 +14,16 @@ import GLKit
 import ARCL
 
 class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDelegate {
+   
+    
     
     let locationMgr = CLLocationManager()
     //var coordinate0 = CLLocation(latitude: 35.909471407552445, longitude: -79.046063745071379)
-    var coordinate1 = CLLocation(latitude: 35.9068, longitude: -79.0477)
+    var coordinate1 = CLLocation(latitude: 35.90937695875091, longitude: -79.04575981791419)
     var timer: Timer!
     var ref: DatabaseReference!
     var sceneLocationView = SceneLocationView()
+    var retRef: DatabaseReference!
     var activated: Bool!
     
     @IBOutlet weak var sceneView: ARSKView!
@@ -30,15 +33,13 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
         
         self.locationMgr.delegate = self
         self.locationMgr.requestAlwaysAuthorization()
+        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {_ in
+            
+        })
         self.locationMgr.desiredAccuracy = kCLLocationAccuracyBest
         self.locationMgr.requestLocation();
         self.locationMgr.startUpdatingLocation()
         self.locationMgr.startUpdatingHeading()
-        
-        // Ask for camera permissions
-        AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: {_ in
-            
-        })
         
    /*     // Set up ARSceneView
         sceneView.delegate = self
@@ -83,12 +84,14 @@ class  ARViewController: UIViewController, ARSKViewDelegate, CLLocationManagerDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
+        sceneLocationView.run()
+        
+      /*  // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         
         // Run the view's session
-        sceneView.session.run(configuration)
+        sceneView.session.run(configuration) */
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -201,6 +204,46 @@ extension ARViewController{
         print(locationMgr.location?.coordinate.longitude)
         makeAnchor(startCoordinate: locationMgr.location!, endCoordinate: coordinate1)
         let location = self.locationMgr.location
+        ref.child("Users").child("KXO").observe(DataEventType.value, with: { snapshot in
+            print("enters method")
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+                print("enters if")
+                print(snapshots.count)
+                for snap in snapshots {
+                    if let postDictionary = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let pinDict = DictPin(key: key, dictionary: postDictionary)
+                        self.coordinate1 = CLLocation(latitude: pinDict.pinLat, longitude: pinDict.pinLong)
+                        /*if(pinDict.pinLink == nil){
+                         self.tempString = "placeholder"
+                         }
+                         else{
+                         self.tempString = pinDict.pinLink
+                         }
+                         */
+                        //print(self.tempPin.username)
+                    }
+                }
+                
+                
+            }
+            
+            //self.hasRan = true
+            
+        })
+        
+       /* let userRef = ref.child("Users").child("KXO").observe(.childChanged, with: {(snapshot) in
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+            for snap in snapshots {
+                if let postDictionary = snap.value as? Dictionary<String, AnyObject>{
+                    let key = snap.key
+                    let pinDict = DictPin(key: key, dictionary: postDictionary)
+                    self.coordinate1 = CLLocation(latitude: pinDict.pinLat, longitude: pinDict.pinLong)
+                }
+            }
+        }
+        })
+ */
         
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){

@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import Firebase
 import FirebaseDatabase
+import ARKit
 
 
 struct pin{
@@ -68,8 +69,9 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
        // imagePicker.delegate = self
         downLink = "fill link"
         self.locationMgr.delegate = self
-      //  self.locationMgr.requestWhenInUseAuthorization()
-        //self.locationMgr.requestAlwaysAuthorization()
+        self.locationMgr.requestWhenInUseAuthorization()
+        self.locationMgr.requestAlwaysAuthorization()
+        // Ask for camera permissions
         self.locationMgr.desiredAccuracy = kCLLocationAccuracyBest
         self.locationMgr.requestLocation();
         self.locationMgr.startUpdatingLocation()
@@ -289,7 +291,7 @@ class FirstViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         activated = true
     }
     func pass(){
-        let storyboard = UIStoryboard.init(name: "ARController", bundle: nil)
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let ARController = storyboard.instantiateViewController(withIdentifier: "ARController") as!
         ARViewController
         ARController.activated = activated

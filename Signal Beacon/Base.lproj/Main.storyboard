@@ -55,7 +55,7 @@
         <!--View Controller-->
         <scene sceneID="9oC-LY-xPq">
             <objects>
-                <viewController storyboardIdentifier="ARController" id="lkE-Fj-L1y" customClass="ARViewController" customModule="Signal_Beacon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ARController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lkE-Fj-L1y" customClass="ARViewController" customModule="Signal_Beacon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0EJ-SZ-PMA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
